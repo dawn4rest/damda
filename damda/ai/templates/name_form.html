@@ -1,0 +1,22 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<p class="mb-36">
+  안녕하세요, 저는 유영훈이에요.<br>
+  지금부터 여러 질문을 통해 비어있는 당신의 상자를 담아보려고 해요.<br>
+  여러분의 마음을 잘 들여다보고 답해주세요.<br>
+  <br>
+  먼저 당신의 이름을 알려주세요.
+</p>
+
+<form method="POST" action="{% url 'ai:name-form' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="input-wrap mb-36">
+    <input id="your_name" class="input-half" type="text" name="username" maxlength="100" required>
+  </div>
+  <div class="input-wrap">
+    <input class="btn-submit m-auto" type="submit" value="담기">
+  </div>
+</form>
+{% endblock content %}

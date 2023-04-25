@@ -7,11 +7,9 @@ from django.conf import settings
 
 app_name = "ai"
 urlpatterns = [
-    path("", views.IndexView.as_view(), name="index"),
-    path("<int:pk>/", views.DetailView.as_view(), name="detail"),
-    path("<int:pk>/results/", views.ResultsView.as_view(), name="results"),
-    path("<int:question_id>/vote/", views.vote, name="vote"),
-    path('home/', views.home , name='damda-home'),
+    path('', views.index, name='index'),
+    path('name-form/', views.name_form, name='name-form'),
+    path('name-result/', views.name_result, name='name-result'),
     path('face/', views.face, name='face' ),
     path('video', views.video, name='video'),
 ]

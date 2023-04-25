@@ -3,62 +3,36 @@ from django.http import StreamingHttpResponse
 from django.views import generic
 from django.template.loader import get_template 
 from django.urls import reverse
+from random import randint
 
 import cv2, time
 import threading
 
-from .models import Choice, Question
+from .models import Dam
 
 
-class IndexView(generic.ListView):
-    template_name = "index.html"
-    context_object_name = "latest_question_list"
-
-    def get_queryset(self):
-        """Return the last five published questions."""
-        return Question.objects.order_by("-pub_date")[:5]
+def index(request):
+    context = {
+      "bg_type": randint(0,7)
+    }
+    return render(request, "index.html", context)
 
 
-class DetailView(generic.DetailView):
-    model = Question
-    template_name = "detail.html"
+def name_form(request):
+    if request.method == "POST":
+        username = request.POST.get('username')
+        if username != '':
+            request.session['username'] = username
+            return redirect('ai:name-result')
+
+    return render(request, "name_form.html")
 
 
-class ResultsView(generic.DetailView):
-    model = Question
-    template_name = "results.html"
-
-
-def vote(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    try:
-        selected_choice = question.choice_set.get(pk=request.POST["choice"])
-    except (KeyError, Choice.DoesNotExist):
-        # Redisplay the question voting form.
-        return render(
-            request,
-            "detail.html",
-            {
-                "question": question,
-                "error_message": "You didn't select a choice.",
-            },
-        )
-    else:
-        selected_choice.votes += 1
-        selected_choice.save()
-        # Always return an HttpResponseRedirect after successfully dealing
-        # with POST data. This prevents data from being posted twice if a
-        # user hits the Back button.
-        return HttpResponseRedirect(reverse("ai:results", args=(question.id,)))
-
-
-def results(request, question_id):
-    question = get_object_or_404(Question, pk=question_id)
-    return render(request, "results.html", {"question": question})
-    
-
-def home(request):
-    return render(request, 'home.html')
+def name_result(request):
+    context = {
+      "username": request.session.get('username')
+    }
+    return render(request, "name_result.html", context)
 
 
 def face(request):

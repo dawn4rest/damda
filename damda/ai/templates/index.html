@@ -1,9 +1,16 @@
-{% if latest_question_list %}
-<ul>
-  {% for question in latest_question_list %}
-  <li><a href="{% url 'ai:detail' question.id %}">{{ question.question_text }}</a></li>
-  {% endfor %}
-</ul>
-{% else %}
-<p>No target are available.</p>
-{% endif %}
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<section id="main" class="d-flex justify-content-center align-items-center"
+  style="background-image: url('/static/img/bg_intro_{{ bg_type }}.jpg');">
+  <article id="intro" class="d-flex flex-column text-center">
+    <div class="position-relative mb-36">
+      <img class="intro-logo" src="{% static '/img/title_intro_sub.svg' %}" alt="">
+      <img src="{% static '/img/bg_box.svg' %}" alt="">
+    </div>
+
+    <a href="{% url 'ai:name-form' %}"><img src="{% static '/img/title_intro.svg' %}" alt=""></a>
+  </article>
+</section>
+{% endblock content %}
