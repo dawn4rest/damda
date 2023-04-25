@@ -1,4 +1,4 @@
-from django.shortcuts import render, redirect, HttpResponse, get_object_or_404
+from django.shortcuts import render, redirect, HttpResponse, HttpResponseRedirect, get_object_or_404
 from django.http import StreamingHttpResponse
 from django.views import generic
 from django.template.loader import get_template 
