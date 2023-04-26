@@ -84,6 +84,10 @@ def face02_form(request):
 
 
 def face02_result(request):
+    request.session['red'] = random.randint(0,255)
+    request.session['green'] = random.randint(0,255)
+    request.session['blue'] = random.randint(0,255)
+
     request.session['emotion02'] = random.choice([True, False])
     context = {
       'emotion01': request.session['emotion01'],
