@@ -1,0 +1,11 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<p>
+  그렇군요, 당신은 그런 고민을 마음에 담아두고 있었군요.<br>
+  이번엔 그 생각에 대해 어떻게 생각하는지 당신의 목소리로 알려주세요.
+</p>
+
+<a href="{% url 'ai:face02-form' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
+{% endblock content %}

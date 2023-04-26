@@ -1,0 +1,35 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if emotion01 %}
+{% if emotion02 %}
+<p>
+  당신의 그런 모습이 정말 존경스러운걸요,<br>
+  앞으로도 그 마음 변치 않고 가지고 가길 빌어요.
+</p>
+{% else %}
+<p>
+  그동안 고생 많았어요,<br>
+  지금은 어려울지라도 앞으로 잘 헤쳐나갈 수 있을 힘이<br>
+  당신에게 꼭 생길거예요.
+</p>
+{% endif %}
+{% else %}
+{% if emotion02 %}
+<p>
+  당신의 그런 모습이 정말 존경스러운걸요,<br>
+  앞으로도 그 마음 변치 않고 가지고 가길 빌어요.
+</p>
+{% else %}
+<p>
+  그동안 고생 많았어요,<br>
+  지금은 어려울지라도 앞으로 잘 헤쳐나갈 수 있을 힘이<br>
+  당신에게 꼭 생길거예요.
+</p>
+{% endif %}
+{% endif %}
+
+<a href="{% url 'ai:canvas-intro' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
+{% endblock content %}

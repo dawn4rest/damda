@@ -51,14 +51,15 @@
 
   <title>{% block title %}Damda{% endblock title %}</title>
 </head>
-<section id="main" class="d-flex justify-content-center align-items-center">
+<section id="main" class="d-flex justify-content-center align-items-center"
+  style="background-color: rgba({{ request.session.red }}, {{ request.session.green }}, {{ request.session.blue }}, 0.25);">
   <a class="logo" href="{% url 'ai:index' %}"><img src="{% static '/img/title_intro_sub.svg' %}" alt=""></a>
   <article id="default" class="d-flex justify-content-center align-items-center flex-column text-center">
     {% block content %}
 
     {% endblock content %}
   </article>
-</section>
+</section>\
 
 <script src={% static "js/script.js" %} type="text/javascript"></script>
 

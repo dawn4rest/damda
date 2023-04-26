@@ -1,0 +1,13 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<form method="POST" action="{% url 'ai:problem-form' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="textarea-wrap">
+    <textarea id="input-problem" name="problem" cols="30" rows="10"></textarea>
+  </div>
+
+  <input class="btn-full" type="submit" value="담기">
+</form>
+{% endblock content %}

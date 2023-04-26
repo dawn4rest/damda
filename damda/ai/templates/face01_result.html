@@ -1,0 +1,21 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+
+{% if emotion01 %}
+<p>
+  당신은 지금 (주제)에 대해 잘 해결하려고 하고 있군요.<br>
+  그렇다면 더 자세히 얘기해줄래요? 흥미진진해서 궁금해졌어요.
+</p>
+{% else %}
+<p>
+  당신은 지금 (주제)에 대해 많은 걱정을 하고 있군요,<br>
+  그동안 힘들었겠어요.<br>
+  <br>
+  그렇다면 앞으로 어떻게 하고 싶은지도 애기해줄래요?
+</p>
+{% endif %}
+
+<a href="{% url 'ai:goal-form' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
+{% endblock content %}

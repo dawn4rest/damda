@@ -1,0 +1,13 @@
+{% extends 'home.html' %}
+{% load static %}
+
+{% block content %}
+<p>
+  지금까지 당신의 이야기를 들려줘서 고마워요!<br>
+  <br>
+  마지막으로,<br>
+  자신이 생각하는 자신을 그림으로 그려서 담아볼까요?
+</p>
+
+<a href="{% url 'ai:canvas-result' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
+{% endblock content %}
