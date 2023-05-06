@@ -17,7 +17,7 @@ from konlpy.tag import Kkma
 from konlpy.utils import pprint
 
 
-from deep_emotion import Deep_Emotion
+from ai.deep_emotion import Deep_Emotion
 
 def text_split(sentence):
     kkma = Kkma()

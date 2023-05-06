@@ -6,6 +6,7 @@ import cv2, time
 import threading
 
 from ai.find_problem import find_problem
+from ai.face_predict import face_prediction
 
 
 def index(request):
@@ -53,15 +54,21 @@ def problem_result(request):
 
 
 def face01_form(request):
-    request.session['emotion01'] = random.choice([True, False])
-
     return render(request, 'face01_form.html')
 
 
 def face01_result(request):
-    request.session['red'] = random.randint(0,255)
-    request.session['green'] = random.randint(0,255)
-    request.session['blue'] = random.randint(0,255)
+    answer , red, green, blue = face_prediction('./ai/best_model(cpu).pkl',r'./ai/haarcascade_frontalface_default.xml')
+    print(answer,red,green,blue)
+
+    request.session['red'] = red
+    request.session['green'] = green
+    request.session['blue'] = blue
+
+    if answer == 'positive':
+      request.session['emotion01'] = True
+    else: 
+      request.session['emotion01'] = False
 
     return render(request, 'face01_result.html')
 
@@ -75,15 +82,21 @@ def goal_result(request):
 
 
 def face02_form(request):
-    request.session['emotion02'] = random.choice([True, False])
-    
     return render(request, 'face02_form.html')
 
 
 def face02_result(request):
-    request.session['red'] = random.randint(0,255)
-    request.session['green'] = random.randint(0,255)
-    request.session['blue'] = random.randint(0,255)
+    answer , red, green, blue = face_prediction('./ai/best_model(cpu).pkl',r'./ai/haarcascade_frontalface_default.xml')
+    print(answer,red,green,blue)
+
+    request.session['red'] = red
+    request.session['green'] = green
+    request.session['blue'] = blue
+
+    if answer == 'positive':
+      request.session['emotion02'] = True
+    else: 
+      request.session['emotion02'] = False
 
     return render(request, 'face02_result.html')
 
