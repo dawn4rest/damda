@@ -3,7 +3,7 @@
 
 {% block content %}
 
-{% if emotion01 %}
+{% if request.session.emotion01 %}
 <p>
   당신은 지금 {{ request.session.problem }}에 대해 잘 해결하려고 하고 있군요.<br>
   그렇다면 더 자세히 얘기해줄래요? 흥미진진해서 궁금해졌어요.

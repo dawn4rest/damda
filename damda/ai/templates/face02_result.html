@@ -3,8 +3,8 @@
 
 {% block content %}
 
-{% if emotion01 %}
-{% if emotion02 %}
+{% if request.session.emotion01 %}
+{% if request.session.emotion02 %}
 <p>
   당신의 그런 모습이 정말 존경스러운걸요,<br>
   앞으로도 그 마음 변치 않고 가지고 가길 빌어요.
@@ -17,7 +17,7 @@
 </p>
 {% endif %}
 {% else %}
-{% if emotion02 %}
+{% if request.session.emotion02 %}
 <p>
   당신의 그런 모습이 정말 존경스러운걸요,<br>
   앞으로도 그 마음 변치 않고 가지고 가길 빌어요.

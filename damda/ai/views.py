@@ -27,13 +27,7 @@ def name_form(request):
 
 
 def name_result(request):
-    context = {'username': request.session.get('username')}
-    return render(request, 'name_result.html', context)
-
-
-def name_result(request):
-    context = {'username': request.session.get('username')}
-    return render(request, 'name_result.html', context)
+    return render(request, 'name_result.html')
 
 
 def feel_form(request):
@@ -41,8 +35,7 @@ def feel_form(request):
 
 
 def feel_result(request):
-    context = {'username': request.session.get('username')}
-    return render(request, 'feel_result.html', context)
+    return render(request, 'feel_result.html')
 
 
 def problem_form(request):
@@ -60,6 +53,8 @@ def problem_result(request):
 
 
 def face01_form(request):
+    request.session['emotion01'] = random.choice([True, False])
+
     return render(request, 'face01_form.html')
 
 
@@ -68,9 +63,7 @@ def face01_result(request):
     request.session['green'] = random.randint(0,255)
     request.session['blue'] = random.randint(0,255)
 
-    request.session['emotion01'] = random.choice([True, False])
-    context = {'emotion01': request.session['emotion01']}
-    return render(request, 'face01_result.html', context)
+    return render(request, 'face01_result.html')
 
 
 def goal_form(request):
@@ -82,6 +75,8 @@ def goal_result(request):
 
 
 def face02_form(request):
+    request.session['emotion02'] = random.choice([True, False])
+    
     return render(request, 'face02_form.html')
 
 
@@ -90,12 +85,7 @@ def face02_result(request):
     request.session['green'] = random.randint(0,255)
     request.session['blue'] = random.randint(0,255)
 
-    request.session['emotion02'] = random.choice([True, False])
-    context = {
-      'emotion01': request.session['emotion01'],
-      'emotion02': request.session['emotion02']
-    }
-    return render(request, 'face02_result.html', context)
+    return render(request, 'face02_result.html')
 
 
 def canvas_intro(request):
