@@ -5,6 +5,8 @@ import random
 import cv2, time
 import threading
 
+from ai.find_problem import find_problem
+
 
 def index(request):
     request.session['red'] = 255
@@ -45,7 +47,7 @@ def feel_result(request):
 
 def problem_form(request):
     if request.method == 'POST':
-        problem = request.POST.get('problem')
+        problem = find_problem(request.POST.get('problem'))
         if problem != '':
             request.session['problem'] = problem
             return redirect('ai:problem-result')
