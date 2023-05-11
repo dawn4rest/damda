@@ -1,12 +1,10 @@
-{% extends 'home.html' %}
-{% load static %}
-
 {% block content %}
-<p>
-  당신의 기분을 알려줘서 고마워요, 저는 오늘 당신을 만나서 무척 반가워요.<br>
+<p class="guest">
+  {{ request.session.feel }}
+</p>
+<p class="host">
+  당신의 기분을 알려줘서 고마워요.<br>
   요즘 {{ request.session.username }}님이 고민하고 있는 게 있나요?<br>
   마음 속에 담아 둔 당신의 고민거리를 저에게 들려주세요.
 </p>
-
-<a href="{% url 'ai:problem-form' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
 {% endblock content %}

@@ -1,21 +1,5 @@
-{% extends 'home.html' %}
-{% load static %}
-
 {% block content %}
-<div class="face-wrap | d-flex justify-content-between align-items-center">
-  <div id="video">
-    <img src="{% url 'ai:video' %}" width="557px" height="502px">
-  </div>
-
-  <div class="face-info | d-flex justify-content-between align-items-center flex-column">
-    <span></span>
-    <p>
-      space 키를 누르면 유영훈이 당신의 목소리를 듣습니다.<br>
-      당신의 이야기를 담아주세요.
-    </p>
-    <a href="#"><img src="{% static '/img/icon_voice.svg' %}" alt=""></a>
-  </div>
+<div id="video">
+  <img src="{% url 'ai:video' %}" width="557px" height="502px">
 </div>
-
-<a class="btn-full" href="{% url 'ai:face01-result' %}">담기</a>
 {% endblock content %}

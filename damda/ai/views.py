@@ -1,5 +1,6 @@
 from django.shortcuts import render, redirect, HttpResponse
-from django.http import StreamingHttpResponse
+from django.http import HttpResponse, StreamingHttpResponse
+from django.template.loader import render_to_string
 
 import random
 import cv2, time
@@ -32,7 +33,11 @@ def name_result(request):
 
 
 def feel_form(request):
-    return render(request, 'feel_form.html')
+    if request.method == 'POST':
+        feel = request.POST.get('feel')
+        if feel != '':
+            request.session['feel'] = feel
+    return HttpResponse(status=204)
 
 
 def feel_result(request):
@@ -41,10 +46,12 @@ def feel_result(request):
 
 def problem_form(request):
     if request.method == 'POST':
-        problem = find_problem(request.POST.get('problem'))
-        if problem != '':
+        problem = request.POST.get('problem')
+        problem_result = find_problem(problem)
+        if problem_result != '':
             request.session['problem'] = problem
-            return redirect('ai:problem-result')
+            request.session['problem_result'] = problem_result
+        return HttpResponse(status=204)
 
     return render(request, 'problem_form.html')
 

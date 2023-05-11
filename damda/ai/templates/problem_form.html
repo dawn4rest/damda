@@ -1,13 +1,37 @@
-{% extends 'home.html' %}
-{% load static %}
-
-{% block content %}
+{% block form %}
+<span class="cur-stage" style="display: none">problem</span>
+<span class="next-stage" style="display: none">face01</span>
 <form method="POST" action="{% url 'ai:problem-form' %}" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="textarea-wrap">
     <textarea id="input-problem" name="problem" cols="30" rows="10"></textarea>
   </div>
 
-  <input class="btn-full" type="submit" value="담기">
+  <input class="btn-submit" type="submit" value="담기">
 </form>
-{% endblock content %}
+
+<script>
+  $('.btn-submit').on('click', function () {
+    var curStage = $('.cur-stage').text();
+    var nextStage = $('.next-stage').text();
+
+    setTimeout(function () {
+      $.ajax({
+        url: `/${curStage}-result`,
+        success: function (data) {
+          console.log(data)
+          $('.article-body').append(data)
+        }
+      });
+
+      $.ajax({
+        url: `/${nextStage}-form`,
+        success: function (data) {
+          console.log(data)
+          $('.article-footer').html(data)
+        }
+      });
+    }, 250)
+  });
+</script>
+{% endblock form %}

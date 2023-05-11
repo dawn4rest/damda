@@ -2,12 +2,29 @@
 {% load static %}
 
 {% block content %}
-<p>
+<p class="host">
+  안녕하세요, 저는 유영훈이에요.<br>
+  지금부터 여러 질문을 통해 비어있는 당신의 상자를 담아보려고 해요.<br>
+  여러분의 마음을 잘 들여다보고 답해주세요.
+</p>
+
+<p class="host">
   당신의 이름은 {{ request.session.username }}이군요. 이렇게 만나게 되어서 정말 반가워요.<br>
-  <br>
   오늘 기분은 어떠한지 말해줄 수 있나요?<br>
   그리고 그 기분의 이유도 같이 말해주세요.
 </p>
-
-<a href="{% url 'ai:feel-form' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
 {% endblock content %}
+
+
+{% block form %}
+<span class="cur-stage" style="display: none">feel</span>
+<span class="next-stage" style="display: none">problem</span>
+<form method="POST" action="{% url 'ai:feel-form' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="textarea-wrap">
+    <textarea id="input-feel" name="feel" cols="30" rows="10"></textarea>
+  </div>
+
+  <input class="btn-submit" type="submit" value="담기">
+</form>
+{% endblock form %}
