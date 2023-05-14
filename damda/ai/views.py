@@ -14,8 +14,7 @@ def index(request):
     request.session['red'] = 255
     request.session['green'] = 255
     request.session['blue'] = 255
-    context = {'bg_type': random.randint(0,7)}
-    return render(request, 'index.html', context)
+    return render(request, 'index.html')
 
 
 def name_form(request):
