@@ -11,9 +11,9 @@ from ai.face_predict import face_prediction
 
 
 def index(request):
-    request.session['red'] = 255
-    request.session['green'] = 255
-    request.session['blue'] = 255
+    # request.session['red'] = 255
+    # request.session['green'] = 255
+    # request.session['blue'] = 255
     return render(request, 'index.html')
 
 

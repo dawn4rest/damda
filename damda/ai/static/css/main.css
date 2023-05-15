@@ -280,7 +280,7 @@ body {
 }
 
 
-#main.main-intro {    
+/* #main.main-intro {    
   position: fixed;
   width: 100vw;
   height: 100vh;
@@ -305,7 +305,7 @@ body {
 }
 #main article#intro form input {
   border: 1px solid #000000;
-}
+} */
 
 #main #video {
   background-color: #333;
