@@ -16,12 +16,10 @@ urlpatterns = [
     path('problem-result/', views.problem_result, name='problem-result'),
     path('face01-form/', views.face01_form, name='face01-form'),
     path('face01-result/', views.face01_result, name='face01-result'),
-    path('goal-form/', views.goal_form, name='goal-form'),
-    path('goal-result/', views.goal_result, name='goal-result'),
     path('face02-form/', views.face02_form, name='face02-form'),
     path('face02-result/', views.face02_result, name='face02-result'),
-    path('canvas-intro/', views.canvas_intro, name='canvas-intro'),
-    path('canvas-result/', views.canvas_result, name='canvas-result'),
+    path('draw-intro/', views.draw_intro, name='draw-intro'),
+    path('draw-result/', views.draw_result, name='draw-result'),
     path('video', views.video, name='video'),
 ]
 

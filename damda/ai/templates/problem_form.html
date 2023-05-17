@@ -1,6 +1,7 @@
 {% block form %}
 <span class="cur-stage" style="display: none">problem</span>
 <span class="next-stage" style="display: none">face01</span>
+
 <form method="POST" action="{% url 'ai:problem-form' %}" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="textarea-wrap">

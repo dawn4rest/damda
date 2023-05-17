@@ -17,8 +17,6 @@
 
 
 {% block form %}
-<span class="cur-stage" style="display: none">feel</span>
-<span class="next-stage" style="display: none">problem</span>
 <form method="POST" action="{% url 'ai:feel-form' %}" enctype="multipart/form-data">
   {% csrf_token %}
   <div class="textarea-wrap">

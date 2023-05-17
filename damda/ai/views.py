@@ -11,9 +11,9 @@ from ai.face_predict import face_prediction
 
 
 def index(request):
-    # request.session['red'] = 255
-    # request.session['green'] = 255
-    # request.session['blue'] = 255
+    request.session['red'] = 255
+    request.session['green'] = 255
+    request.session['blue'] = 255
     return render(request, 'index.html')
 
 
@@ -36,7 +36,9 @@ def feel_form(request):
         feel = request.POST.get('feel')
         if feel != '':
             request.session['feel'] = feel
-    return HttpResponse(status=204)
+            return HttpResponse(status=204)
+
+    return render(request, 'feel_form.html')
 
 
 def feel_result(request):
@@ -60,10 +62,6 @@ def problem_result(request):
 
 
 def face01_form(request):
-    return render(request, 'face01_form.html')
-
-
-def face01_result(request):
     answer , red, green, blue = face_prediction('./ai/best_model(cpu).pkl',r'./ai/haarcascade_frontalface_default.xml')
     print(answer,red,green,blue)
 
@@ -76,15 +74,11 @@ def face01_result(request):
     else: 
       request.session['emotion01'] = False
 
+    return render(request, 'face01_form.html')
+
+
+def face01_result(request):
     return render(request, 'face01_result.html')
-
-
-def goal_form(request):
-    return render(request, 'goal_form.html')
-
-
-def goal_result(request):
-    return render(request, 'goal_result.html')
 
 
 def face02_form(request):
@@ -107,16 +101,16 @@ def face02_result(request):
     return render(request, 'face02_result.html')
 
 
-def canvas_intro(request):
-    return render(request, 'canvas_intro.html')
+def draw_intro(request):
+    return render(request, 'draw_intro.html')
 
 
-def canvas_result(request):
+def draw_result(request):
     context = {
       'hex_color': '%02x%02x%02x' % (request.session['red'],request.session['green'],request.session['blue']),
       'quote_index': random.randint(0,56)
     }
-    return render(request, 'canvas_result.html', context)
+    return render(request, 'draw_result.html', context)
 
 
 def stream():
