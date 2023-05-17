@@ -4,30 +4,10 @@
 {% block content %}
 <section id="main" class="main-intro | d-flex justify-content-center align-items-center">
   <article id="intro" class="d-flex flex-column justify-content-center text-center">
-    <div class="position-relative mb-36">
+    <a class="position-relative mb-36" href="{% url 'ai:name-form' %}">
       <img class="intro-logo" src="{% static '/img/title_intro_sub.svg' %}" alt="">
-      <img src="{% static '/img/bg_box.svg' %}" alt="">
-
-      <div class="ajax-wrap" style="display: none;"></div>
-    </div>
-
-    <a class="btn-start" href="#"><img src="{% static '/img/title_intro.svg' %}" alt=""></a>
-    <!-- <a class="btn-start" href="{% url 'ai:name-form' %}"><img src="{% static '/img/title_intro.svg' %}" alt=""></a> -->
+      <img class="bg-box" src="{% static '/img/bg_box_white.svg' %}" alt="">
+    </a>
   </article>
 </section>
-
-<script>
-  $('.btn-start').on('click', function () {
-    $(this).fadeOut(250);
-
-    $.ajax({
-      url: 'name-form/',
-      success: function (data) {
-        $('.ajax-wrap').html(data)
-      }
-    })
-
-    $('.ajax-wrap').fadeIn(500);
-  });
-</script>
 {% endblock content %}

@@ -1,13 +1,26 @@
-<form method="POST" action="{% url 'ai:name-form' %}" enctype="multipart/form-data">
-  {% csrf_token %}
-  <div class="input-wrap mb-36">
-    <span class="d-block mb-36 text-white"
-      style="font-family: 'Garam'; font-weight: 400; font-size: 30px; line-height: 36px;">
-      당신의 이름을 담아주세요.
-    </span>
-    <input id="your_name" class="input-half" type="text" name="username" maxlength="100" required>
-  </div>
-  <div class="input-wrap">
-    <input class="btn-submit m-auto" type="submit" value="담기">
-  </div>
-</form>
+{% extends 'home.html' %}
+
+{% load static %}
+{% block content %}
+<section id="main" class="main-intro | d-flex justify-content-center align-items-center">
+  <article id="intro" class="d-flex flex-column justify-content-center text-center">
+    <div class="position-relative mb-36">
+      <img class="bg-box" src="{% static '/img/bg_box_black.svg' %}" alt="">
+
+      <form method="POST" action="{% url 'ai:name-form' %}" enctype="multipart/form-data">
+        {% csrf_token %}
+        <div class="input-wrap mb-36">
+          <span class="d-block mb-36 text-white"
+            style="font-family: 'Garam'; font-weight: 400; font-size: 30px; line-height: 36px;">
+            당신의 이름을 담아주세요.
+          </span>
+          <input id="your_name" class="input-half" type="text" name="username" maxlength="100" required>
+        </div>
+        <div class="input-wrap">
+          <input class="btn-submit m-auto" type="submit" value="담기">
+        </div>
+      </form>
+    </div>
+  </article>
+</section>
+{% endblock content %}
