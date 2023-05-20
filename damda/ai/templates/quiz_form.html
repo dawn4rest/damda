@@ -1,0 +1,65 @@
+{% block form %}
+<form method="POST" action="{% url 'ai:quiz-form' %}" enctype="multipart/form-data">
+  {% csrf_token %}
+  <div class="d-flex justify-content-center align-items-center">
+    <div class="input-wrap m-5">
+      <input type="radio" name="quizPoint" id="q-1-z">
+      <label for="q-1-z">(1)</label>
+    </div>
+    <div class="input-wrap m-5">
+      <input type="radio" name="quizPoint" id="q-1-m">
+      <label for="q-1-m">(2)</label>
+    </div>
+    <div class="input-wrap m-5">
+      <input type="radio" name="quizPoint" id="q-1-p">
+      <label for="q-1-p">(3)</label>
+    </div>
+  </div>
+
+  <input class="btn-submit" type="submit" value="담기">
+</form>
+
+<script>
+  var quizStage = {{ request.session.quizStage }};
+  var quizValue = {{ quizValue }};
+
+  $('input[type="radio"]').each(function (index) {
+    $(this).val(quizValue[quizStage][index]);
+  });
+
+  $('.btn-submit').on('click', function () {
+    var stage = ['feel', 'quiz', 'problem', 'face01', 'face02', 'draw'];
+    var curStage = $('form').attr('action').match(/\/([^-]+)/)[1];
+    var nextStage = stage[stage.indexOf(curStage) + 1];
+
+    if (jQuery.inArray(curStage, stage) !== -1) {
+      if (curStage.indexOf('quiz') != -1) {
+        if (quizStage > 9) {
+          nextStage = 'problem';
+        } else {
+          nextStage = 'quiz';
+        }
+      }
+
+      console.log(curStage);
+      console.log(nextStage);
+
+      setTimeout(function () {
+        $.ajax({
+          url: `/${curStage}-result`,
+          success: function (data) {
+            $('.article-body').append(data);
+          }
+        });
+
+        $.ajax({
+          url: `/${nextStage}-form`,
+          success: function (data) {
+            $('.article-footer').html(data);
+          }
+        });
+      }, 250);
+    };
+  });
+</script>
+{% endblock form %}

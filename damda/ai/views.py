@@ -14,6 +14,8 @@ def index(request):
     request.session['red'] = 255
     request.session['green'] = 255
     request.session['blue'] = 255
+    request.session['quizStage'] = 1
+    request.session['quizPoint'] = 0
     return render(request, 'index.html')
 
 
@@ -36,13 +38,71 @@ def feel_form(request):
         feel = request.POST.get('feel')
         if feel != '':
             request.session['feel'] = feel
-            return HttpResponse(status=204)
 
-    return render(request, 'feel_form.html')
+    return HttpResponse(status=204)
 
 
 def feel_result(request):
     return render(request, 'feel_result.html')
+
+
+def quiz_form(request):
+    quizValue = {
+      1: [0, -1, 1],
+      2: [-1, 1, 0],
+      3: [1, 0, -1],
+      4: [0, 1, -1],
+      5: [-1, 1, 0],
+      6: [1, 0, -1],
+      7: [-1, 0, 1],
+      8: [1, -1, 0],
+      9: [1, 0, -1],
+      10: [1, -1, 0],
+    }
+
+    if request.method == 'POST':
+        quizPoint = request.POST.get('quizPoint')
+        if quizPoint is not None and request.session['quizStage'] < 11:
+            request.session['quizStage'] = request.session['quizStage'] + 1
+            request.session['quizPoint'] = request.session['quizPoint'] +int(quizPoint)
+            return HttpResponse(status=204)
+
+    context = {'quizValue': quizValue}
+    return render(request, 'quiz_form.html', context)
+
+
+def quiz_result(request):
+    soloType = [2, 5, 9]
+    soloObj = {
+      2: {1: '달', 2: '사람얼굴', 3: '나비'},
+      5: {1: '여성', 2: '나무', 3: '그외'},
+      9: {1: '입술', 2: '나무', 3: '뿌리'},
+    }
+    quizScript = {
+      1: '다음 그림 중 가장 마음에 드는 그림을 골라주세요.',
+      2: '다음 그림에서 무엇이 먼저 보이시나요?',
+      3: '다음 그림 중 가장 행복해 보이는 그림을 고르세요.',
+      4: '다음 그림 중 인간관계를 가장 잘 표현한 그림은 무엇인가요?',
+      5: '다음 그림에서 무엇이 먼저 보이시나요?',
+      6: '다음 사진 중 가장 힘들어 보이는 사람은 누구인가요?',
+      7: '다음 사진 중 평소 당신의 표정은 어떤가요?',
+      8: '다음 사진 중 가장 마음에 드는 생일 날 사진은 무엇인가요?',
+      9: '다음 그림에서 무엇이 먼저 보이시나요?',
+      10: '가장 마음에 드는 그림을 골라주세요.',
+
+    }
+    
+    if request.session['quizStage'] in soloType:
+      quizType = 'solo'
+    else:
+      quizType = 'triple'
+
+    context = {
+      'quizType': quizType,
+      'soloObj': soloObj,
+      'quizScript': quizScript,
+    }
+    return render(request, 'quiz_result.html', context)
 
 
 def problem_form(request):
@@ -63,7 +123,6 @@ def problem_result(request):
 
 def face01_form(request):
     answer , red, green, blue = face_prediction('./ai/best_model(cpu).pkl',r'./ai/haarcascade_frontalface_default.xml')
-    print(answer,red,green,blue)
 
     request.session['red'] = red
     request.session['green'] = green
@@ -87,7 +146,6 @@ def face02_form(request):
 
 def face02_result(request):
     answer , red, green, blue = face_prediction('./ai/best_model(cpu).pkl',r'./ai/haarcascade_frontalface_default.xml')
-    print(answer,red,green,blue)
 
     request.session['red'] = red
     request.session['green'] = green

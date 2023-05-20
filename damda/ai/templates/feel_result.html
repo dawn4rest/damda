@@ -1,10 +1,27 @@
+{% load static %}
 {% block content %}
 <p class="guest">
   {{ request.session.feel }}
 </p>
 <p class="host">
   당신의 기분을 알려줘서 고마워요.<br>
-  요즘 {{ request.session.username }}님이 고민하고 있는 게 있나요?<br>
-  마음 속에 담아 둔 당신의 고민거리를 저에게 들려주세요.
+  먼저 상담을 하기 전에 간단한 심리 테스트를 해보려고 해요.<br>
+  가벼운 마음으로 해볼까요?
+</p>
+<p class="host">
+  &#60;심리 테스트&#62;<br>
+  이 심리 테스트는 질문에 따라 자신의 생각과 맞는 사진을 고르는 테스트입니다.<br>
+  질문은 총 10개로, 사진에 따라 점수가 주어집니다.<br>
+  테스트를 통해 여러분의 최근 심리상태를 확인해보세요.
+</p>
+
+<p class="host">
+  [질문 {{ request.session.quizStage }}]<br>
+  다음 그림 중 가장 마음에 드는 그림을 고르세요.<br>
+  <span class="row text-center">
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-1.jpg" alt="">(1)</span>
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-2.jpg" alt="">(2)</span>
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-3.jpg" alt="">(3)</span>
+  </span>
 </p>
 {% endblock content %}

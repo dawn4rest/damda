@@ -1,0 +1,80 @@
+{% load static %}
+{% block content %}
+
+{% if request.session.quizStage > 10 %}
+<p class="host">
+  테스트에 답해줘서 고마워요.당신은 최근에 <span class="quiz-result"></span>인 상태이군요.<br>
+  {{ request.session.username }}님의 상자에 당신의 상태가 담겼어요.
+</p>
+<p class="host">
+  그럼 이제 조금 더 심층있는 이야기를 해보려고 해요.<br>
+  요즘 {{ request.session.username }}님이 고민하고 있는 게 있나요?<br>
+  마음 속에 담아 둔 당신의 고민거리를 저에게 들려주세요.
+</p>
+{% else %}
+<p class="host">
+  [질문 {{ request.session.quizStage }}]<br>
+  <span class="quiz-script"></span><br>
+
+  {% if quizType == "solo" %}
+  <span class="row text-center">
+    <span class="col-4"></span>
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-only.jpg" alt=""></span>
+    <span class="col-4"></span>
+  </span>
+  <span class="row text-center">
+    <span class="col-4 solo-label"></span>
+    <span class="col-4 solo-label"></span>
+    <span class="col-4 solo-label"></span>
+  </span>
+  {% else %}
+  <span class="row text-center">
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-1.jpg" alt="">(1)</span>
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-2.jpg" alt="">(2)</span>
+    <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-3.jpg" alt="">(3)</span>
+  </span>
+  {% endif %}
+</p>
+{% endif %}
+<script>
+  var quizStage = {{ request.session.quizStage }};
+  var quizPoint = {{ request.session.quizPoint }};
+  var soloObj = {{ soloObj | safe }};
+  var quizScript = {{ quizScript | safe }};
+
+  $('.solo-label').each(function (index) {
+    $(this).text(`(${index + 1}) ${soloObj[quizStage][index + 1]}`);
+    $(this).removeClass('solo-label');
+  });
+  $('.quiz-script').text(quizScript[quizStage]);
+  $('.quiz-script').removeClass('quiz-script');
+
+  console.log(quizPoint);
+  if ($('.quiz-result').length) {
+    console.log(quizPoint);
+    console.log(quizPoint);
+    console.log(quizPoint);
+    console.log(quizPoint);
+    var resultScript = '';
+    switch (true) {
+      case (quizPoint < -7):
+        var resultScript = '순수하게 내성적';
+        break;
+      case (-7 <= quizPoint && quizPoint < -3):
+        var resultScript = '상황에 따른 내성적';
+        break;
+      case (-3 <= quizPoint && quizPoint < 4):
+        var resultScript = '양향적인 성격';
+        break;
+      case (4 <= quizPoint && quizPoint < 8):
+        var resultScript = '선택적 외향적인 성격';
+        break;
+      case (8 <= quizPoint):
+        var resultScript = '순수하게 외향적';
+        break;
+    }
+    $('.quiz-result').text(resultScript);
+    $('.quiz-result').removeClass('quiz-result');
+  }
+</script>
+{% endblock content %}
