@@ -29,6 +29,10 @@ $('.btn-submit').on('click', function () {
           $('.article-footer').html(data);
         }
       });
+
+      $(".article-body").animate({
+        scrollTop: $('.article-body').get(0).scrollHeight
+      }, 500);
     }, 250);
   };
 });

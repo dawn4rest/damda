@@ -17,18 +17,18 @@
   <span class="quiz-script"></span><br>
 
   {% if quizType == "solo" %}
-  <span class="row text-center">
+  <span class="row text-center mt-2">
     <span class="col-4"></span>
     <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-only.jpg" alt=""></span>
     <span class="col-4"></span>
   </span>
-  <span class="row text-center">
+  <span class="row text-center mb-1">
     <span class="col-4 solo-label"></span>
     <span class="col-4 solo-label"></span>
     <span class="col-4 solo-label"></span>
   </span>
   {% else %}
-  <span class="row text-center">
+  <span class="row text-center mt-2 mb-1">
     <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-1.jpg" alt="">(1)</span>
     <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-2.jpg" alt="">(2)</span>
     <span class="col-4"><img class="w-100" src="/static/img/{{ request.session.quizStage }}-3.jpg" alt="">(3)</span>
@@ -51,10 +51,6 @@
 
   console.log(quizPoint);
   if ($('.quiz-result').length) {
-    console.log(quizPoint);
-    console.log(quizPoint);
-    console.log(quizPoint);
-    console.log(quizPoint);
     var resultScript = '';
     switch (true) {
       case (quizPoint < -7):
