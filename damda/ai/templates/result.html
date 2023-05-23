@@ -1,0 +1,39 @@
+{% extends 'home.html' %}
+
+{% load static %}
+{% block content %}
+<section id="main" class="main-intro | d-flex justify-content-center align-items-center">
+  <article id="intro" class="d-flex flex-column justify-content-center text-center">
+    <div class="face-info | d-flex justify-content-center align-items-center flex-column">
+      <h1>{{ request.session.username }}님의 담</h1>
+      <div class="d-flex justify-content-between align-items-center m-5">
+        <div class="paint-stroke" style="background-color: #{{ hex_color }};"></div>
+        <p>{{ hex_color }}</p>
+      </div>
+      <p id="quote">
+        앞으로도 당신의 결정을 쭉 믿으세요<br>
+        행복만 가득하길!
+      </p>
+    </div>
+  </article>
+</section>
+
+<script>
+  $('.btn-full').on('click', function () {
+    $(this).hide();
+    $('.loading').addClass('active');
+
+    setTimeout(() => {
+      $('.loading').removeClass('active');
+      $('.last-panel').addClass('active');
+      $('.share-insta').fadeIn('500');
+    }, '2500');
+  });
+
+  var quote_list = [
+    '열린 마음으로 기다려보아요',
+    '지금은 쉬어야 할 때예요',
+  ];
+  $('#quote').text(quote_list[{{ quote_index }}]);
+</script>
+{% endblock content %}

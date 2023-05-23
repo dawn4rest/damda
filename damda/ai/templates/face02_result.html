@@ -11,6 +11,19 @@
   마지막으로,<br>
   자신이 생각하는 자신을 그림으로 그려서 담아볼까요?
 </p>
+<p class="host">
+  <span class="d-flex align-items-center">
+    <img src="{% static '/img/icon_draw.svg' %}" alt="">
+    잠시후, 드로우담이 실행됩니다.<br>
+    여러분이 생각하는 것을 자유롭게 담아주세요.
+  </span>
+</p>
+<p class="host">
+  <span class="d-flex align-items-center">
+    <img src="{% static '/img/icon_draw.svg' %}" alt="">
+    드로우담이 진행중입니다.
+  </span>
+</p>
 
 <script>
   var type = $('.answer').attr('name');
@@ -41,9 +54,5 @@
 
   $('.article-body').css('background-color', 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})');
   $('.modal').modal('hide');
-  setTimeout(function () {
-    $('.modal-loading').remove();
-    $('.modal').remove();
-  }, 1000);
 </script>
 {% endblock content %}

@@ -1,21 +1,27 @@
 {% load static %}
 {% block content %}
-<div class="last-panel | d-flex justify-content-center align-items-center">
-  <div class="canvas-wrap">
-    <canvas id="canvas" width="557" height="502"></canvas>
-  </div>
+<p class="host canvas-wrap">
+  <canvas id="canvas" width="557" height="502"></canvas>
+</p>
 
-  <div class="face-info | d-flex justify-content-center align-items-center flex-column">
-    <h1>{{ request.session.username }}님의 담</h1>
-    <div class="d-flex justify-content-between align-items-center m-5">
-      <div class="paint-stroke" style="background-color: #{{ hex_color }};"></div>
-      <p>{{ hex_color }}</p>
-    </div>
-    <p id="quote">
-      앞으로도 당신의 결정을 쭉 믿으세요<br>
-      행복만 가득하길!
-    </p>
+<p class="host">
+  <span class="d-flex align-items-center">
+    <img src="{% static '/img/icon_draw.svg' %}" alt="">
+    {{ request.session.username }}님을 담는중...
+  </span>
+</p>
+
+<div class="face-info | d-flex justify-content-center align-items-center flex-column">
+  <h1>{{ request.session.username }}님의 담</h1>
+  <div class="d-flex justify-content-between align-items-center m-5">
+    <div class="paint-stroke" style="background-color: #{{ hex_color }};"></div>
+    <p>{{ hex_color }}</p>
   </div>
+  <p id="quote">
+    앞으로도 당신의 결정을 쭉 믿으세요<br>
+    행복만 가득하길!
+  </p>
+</div>
 </div>
 
 <a href="#" class="space-link share-insta">
@@ -33,28 +39,6 @@
   <img src="{% static '/img/icon_loading.svg' %}" alt="">
 </div>
 
-<script>
-  const canvas = document.querySelector("#canvas");
-  const ctx = canvas.getContext("2d");
-  ctx.lineWidth = 15;
-  ctx.lineCap = "round";
-  ctx.strokeStyle = '#333';
-
-  const draw = e => {
-    const x = e.offsetX;
-    const y = e.offsetY;
-    if (!drawing) return;
-    ctx.beginPath();
-    ctx.moveTo(x, y);
-    ctx.lineTo(x, y);
-    ctx.stroke();
-  };
-
-  let drawing = false; //기본상태는 대기상태
-  canvas.addEventListener("mousedown", () => (drawing = true)); // 드로잉 끝
-  canvas.addEventListener("mouseup", () => (drawing = false)); // 드로잉 대기
-  canvas.addEventListener("mousemove", draw);
-</script>
 <script>
   $('.btn-full').on('click', function () {
     $(this).hide();

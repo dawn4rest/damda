@@ -22,6 +22,7 @@ urlpatterns = [
     path('face02-result/', views.face02_result, name='face02-result'),
     path('draw-form/', views.draw_form, name='draw-form'),
     path('draw-result/', views.draw_result, name='draw-result'),
+    path('result/', views.result, name='result'),
     path('video', views.video, name='video'),
 ]
 

@@ -1,3 +1,79 @@
 {% load static %}
 {% block form %}
+<span class="cur-stage" style="display: none">draw</span>
+<span class="cur-stage" style="display: none">result</span>
+
+<!-- Modal -->
+<div class="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="article-header">
+        <div class="btn-wrap | d-flex">
+          <button class="btn-red"></button>
+          <button class="btn-green"></button>
+          <button class="btn-blue"></button>
+        </div>
+      </div>
+      <div class="canvas-wrap">
+        <canvas id="canvas" width="557" height="502"></canvas>
+        <input class="btn-submit" data-bs-dismiss="modal" aria-label="Close" type="submit" value="담기">
+      </div>
+    </div>
+  </div>
+</div>
+
+<script>
+  $('.btn-submit').css('pointer-events', 'none');
+  setTimeout(function () {
+    $('.btn-submit').css('pointer-events', 'auto');
+    $('.modal').modal('show');
+  }, 3000);
+
+  $('.btn-submit').on('click', function (e) {
+    var curStage = $('.cur-stage').text();
+    var nextStage = $('.next-stage').text();
+
+    setTimeout(function () {
+      $.ajax({
+        url: `/${curStage}-result`,
+        success: function (data) {
+          $('.article-body').append(data)
+        }
+      });
+
+      $.ajax({
+        url: `/${nextStage}`,
+        success: function (data) {
+          $('.article-footer').html(data)
+        }
+      });
+
+      $('.article-body').animate({
+        scrollTop: $('.article-body').get(0).scrollHeight
+      }, 500);
+    }, 250)
+  });
+
+  const canvas = document.querySelector("#canvas");
+  const ctx = canvas.getContext("2d");
+  ctx.lineWidth = 25;
+  ctx.lineCap = "round";
+  ctx.strokeStyle = 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})';
+
+  const draw = e => {
+    const x = e.offsetX;
+    const y = e.offsetY;
+    if (!drawing) return;
+    ctx.beginPath();
+    ctx.moveTo(x, y);
+    ctx.lineTo(x, y);
+    ctx.stroke();
+  };
+
+  let drawing = false; //기본상태는 대기상태
+  canvas.addEventListener("mousedown", () => (drawing = true)); // 드로잉 끝
+  canvas.addEventListener("mouseup", () => (drawing = false)); // 드로잉 대기
+  canvas.addEventListener("mousemove", draw);
+</script>
 {% endblock form %}

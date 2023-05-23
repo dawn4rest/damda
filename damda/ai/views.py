@@ -11,11 +11,6 @@ from ai.face_predict import face_prediction
 
 
 def index(request):
-    request.session['red'] = 0
-    request.session['green'] = 0
-    request.session['blue'] = 0
-    request.session['quizStage'] = 1
-    request.session['quizPoint'] = 0
     return render(request, 'index.html')
 
 
@@ -30,6 +25,11 @@ def name_form(request):
 
 
 def name_result(request):
+    request.session['red'] = 0
+    request.session['green'] = 0
+    request.session['blue'] = 0
+    request.session['quizStage'] = 1
+    request.session['quizPoint'] = 0
     return render(request, 'name_result.html')
 
 
@@ -163,11 +163,11 @@ def draw_form(request):
 
 
 def draw_result(request):
-    context = {
-      'hex_color': '%02x%02x%02x' % (request.session['red'],request.session['green'],request.session['blue']),
-      'quote_index': random.randint(0,56)
-    }
-    return render(request, 'draw_result.html', context)
+    return render(request, 'draw_result.html')
+
+
+def result(request):
+    return render(request, 'result.html')
 
 
 def stream():
