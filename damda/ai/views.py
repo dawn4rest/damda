@@ -167,7 +167,8 @@ def draw_result(request):
 
 
 def result(request):
-    return render(request, 'result.html')
+    context = {'hex_color': '%02x%02x%02x' % (request.session['red'],request.session['green'],request.session['blue'])}
+    return render(request, 'result.html', context)
 
 
 def stream():

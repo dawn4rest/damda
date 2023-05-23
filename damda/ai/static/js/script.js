@@ -14,7 +14,7 @@ var negAnswers = [
 
 $('document').ready(function() {
   $('.btn-submit').on('click', function () {
-    var stage = ['feel','problem','face01','face02','draw'];
+    var stage = ['feel','draw'];
     var curStage = $('form').attr('action').match(/\/([^-]+)/)[1];
     var nextStage = stage[stage.indexOf(curStage) + 1];
   

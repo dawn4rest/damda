@@ -290,39 +290,9 @@ body {
   border: 1px solid #000000;
 }
 
-#main .btn-full {
-  display: flex;
-  justify-content: center;
-  align-items: center;
-  position: absolute;
-  left: 0;
-  bottom: -93px;
-  width: 100%;
-  height: 66px;
-  font-weight: 400;
-  font-size: 36px;
-  line-height: 44px;
-  background-color: #fff;
-  color: #000;
-  border: 0.5px solid #000000;
-  text-decoration: none;
-}
-
-#main .space-link {
-  position: absolute;
-  bottom: -45px;
-  font-weight: 400;
-  font-size: 20px;
-  line-height: 24px;
-  text-decoration: none;
-  color: #000;
-}
 
 
 
-.modal-dialog.modal-dialog-centered {
-  max-width: 558px;
-}
 @keyframes spin {
   from {
     transform: rotate(0);
@@ -330,6 +300,9 @@ body {
   to{
     transform: rotate(359deg);
   }
+}
+.modal-dialog.modal-dialog-centered {
+  max-width: 558px;
 }
 .modal-loading {
   position: fixed;
@@ -372,86 +345,78 @@ body {
 }
 
 
+
+
 #main #video {
-  position: relative;
   background-color: #333333;
 }
-#video .btn-submit {
+#main .canvas-wrap {
+  position: relative;
+}
+#video .btn-submit,
+.canvas-wrap .btn-submit {
   position: absolute;
   right: 13px;
   bottom: 8px;
 }
 
-#main .face-info {
-  margin-left: 150px;
-  padding: 64px 0 48px;
-  height: 502px;
+#main .canvas-result {
+  background-color: #ffffff;
+  width: 250px;
+  height: 250px;
+  margin-bottom: 25px;
+}
+#main .canvas-result #canvas {
+  width: 250px;
+  height: 250px;
 }
 
 
 
-
-#main .last-panel {
-  background-color: #fff;
-  width: 100%;
-  height: 502px;
-}
-#main .last-panel.active {
-  position: relative;
-  top: -58px;
-  width: 1211px;
-  height: 594px;
-}
-
-#main .last-panel canvas {
-  background-color: #fff;
-}
-#main .last-panel.active canvas {
-  pointer-events: none;
-}
-
-#main .last-panel .face-info {
-  display: none !important;
-}
-#main .last-panel.active .face-info {
-  display: flex !important;
-}
-
-#main .last-panel .face-info {
-  display: none !important;
-}
-#main .last-panel.active .face-info {
-  display: flex !important;
-}
-
-#main .loading {
-  position: absolute;
-  top: 0;
-  left: 0;
-  width: 100%;
-  height: 502px;
-  background: #D9D9D9;
-  opacity: 0;
-  z-index: -1;
-  transition: all 0.5s ease;
-}
-#main .loading.active {
-  opacity: 1;
-  z-index: 1;
-}
-
-#main h1 {
+.result-wrapper .result-title {
+  margin-bottom: 37px;
   font-size: 50px;
   line-height: 61px;
+  color: #FFFFFF;
+}
+.result-wrapper svg {
+  margin: 0 auto;
+}
+.result-wrapper .result-draw {
+  position: absolute;
+  top: 25%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 250px;
+  height: 250px;
+}
+.result-wrapper .result-box {
+  position: absolute;
+  top: 55%;
+  left: 0;
+  right: 0;
+  margin: 0 auto;
+  width: 100%;
+  max-width: 960px;
+  color: #ffffff;
+}
+.text-result {
+  min-width: 400px;
+  transform: rotate(21.3deg);
+}
+.quiz-result {
+  min-width: 400px;
+  transform: rotate(-21.3deg);
+}
+.text-result p {
+  margin-bottom: 8px;
 }
 
-#main .paint-stroke {
-  margin-right: 32px;
-  width: 128px;
-  height: 48px;
-}
-
-#main .share-insta {
-  display: none;
-  bottom: -120px;
+.link-root {
+  position: fixed;
+  right: 35px;
+  bottom: 28px;
+  width: 70px;
+  height: 70px;
 }

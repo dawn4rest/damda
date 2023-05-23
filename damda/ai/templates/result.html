@@ -1,39 +1,113 @@
-{% extends 'home.html' %}
-
 {% load static %}
 {% block content %}
-<section id="main" class="main-intro | d-flex justify-content-center align-items-center">
-  <article id="intro" class="d-flex flex-column justify-content-center text-center">
-    <div class="face-info | d-flex justify-content-center align-items-center flex-column">
-      <h1>{{ request.session.username }}님의 담</h1>
-      <div class="d-flex justify-content-between align-items-center m-5">
-        <div class="paint-stroke" style="background-color: #{{ hex_color }};"></div>
-        <p>{{ hex_color }}</p>
+<div class="result-wrapper" style="display: none;">
+  <section id="main" class="main-intro | d-flex justify-content-center align-items-center">
+    <article id="intro" class="d-flex flex-column justify-content-center text-center">
+      <h1 class="result-title">{{ request.session.username }}님의 담</h1>
+
+      <svg xmlns="http://www.w3.org/2000/svg" width="1043" height="827" viewBox="0 0 1043 827" fill="none">
+        <path
+          d="M1.5 179.33L518.099 372.364L518.648 372.569L519.191 372.348L1039.93 159.916V621.653L518.626 825.389L1.5 621.656V179.33Z"
+          fill="rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})" stroke="black"
+          stroke-width="3" />
+        <path d="M519.141 372.402V827" stroke="black" stroke-width="3" />
+        <path
+          d="M520.687 369.952L4.46425 177.438L520.741 1.57527L756.252 72.729L756.257 72.7303L1038.51 157.069L520.687 369.952Z"
+          fill="white" stroke="black" stroke-width="3" />
+      </svg>
+
+      <div class="result-draw"></div>
+
+      <div class="result-box | d-flex justify-content-between align-items-center">
+        <div class="text-result">
+          <p id="problem-comment"></p>
+          <p id="quote"></p>
+          <p>{{ hex_color }}</p>
+        </div>
+        <p class="quiz-result">순수하게 내성적</p>
       </div>
-      <p id="quote">
-        앞으로도 당신의 결정을 쭉 믿으세요<br>
-        행복만 가득하길!
-      </p>
-    </div>
-  </article>
-</section>
+    </article>
+  </section>
+</div>
+
+<a class="link-root" href="{% url 'ai:index' %}"><img src="{% static '/img/icon_box.svg' %}" alt=""></a>
 
 <script>
-  $('.btn-full').on('click', function () {
-    $(this).hide();
-    $('.loading').addClass('active');
+  setTimeout(function () {
+    $('.result-wrapper').fadeIn(1000);
+    $('.result-draw').html($('.canvas-result'));
+  }, 5000);
 
-    setTimeout(() => {
-      $('.loading').removeClass('active');
-      $('.last-panel').addClass('active');
-      $('.share-insta').fadeIn('500');
-    }, '2500');
-  });
+  var problemObj = {
+    'default': '당신의 고민을 얘기해줘서 고마워요',
+    'work': '당신의 진로에 관한 이야기 잘 들었어요',
+    'love': '당신의 사랑을 응원해요',
+    'money': '당신은 재정쪽에 관심이 많군요',
+    'study': '학업에 대한 열정은 빛을 발할거예요',
+    'health': '당신이 앞으로도 쭉 건강했으면 좋겠어요',
+    'relationship': '인간 관계에 너무 힘들어하지 말아요',
+  }
+  $('#problem-comment').text(problemObj['health']);
 
   var quote_list = [
-    '열린 마음으로 기다려보아요',
-    '지금은 쉬어야 할 때예요',
+    '열린 마음으로 기다려보아요.',
+    '지금은 쉬어야 할 때예요.',
+    '무시하지 말아요.',
+    '인정할 필요가 있어요.',
+    'PASS! 넘겨버리는 것도 좋은 방법이에요.',
+    '살아있는 한 희망은 있어요.',
+    '문제를 일으킬 것이 분명해요.',
+    '지금 아니면 안돼요.',
+    '처음 생각을 믿으세요.',
+    '어느때보다 지금 가장 잘 알고 있어요.',
+    '자신감을 가지고 리드해서 진행해주세요.',
+    '실패할 리 없어요.',
+    '어떻게 하든 결과는 길게 남게 돼요.',
+    '접근 방식을 다시 생각해볼까요.',
+    '세월이 약이에요.',
+    '기쁜일이 다가오니 기다리세요.',
+    '지금 당신에겐 휴식이 먼저예요.',
+    '소신을 가지세요.',
+    '일을 뒤로 미루지 말아요.',
+    '염려하지 말아요.',
+    '자신을 사랑하세요.',
+    '상황이 좋지 않으니 일단 지켜보아요.',
+    '좋은 게 좋은 거예요 좋은 쪽으로 생각하세요.',
+    '가끔은 쉬는게 좋아요.',
+    '먼저 다가가세요.',
+    '서두르지 말아요.',
+    '지금 생각을 쭉 가지고 있어주세요.',
+    '잠시 쉬어도 돼요.',
+    '한숨 자고 생각해보세요.',
+    '시간이 약이에요.',
+    '해가 뜨기 전 새벽이 가장 어두워요.',
+    '먼 훗날의 당신은 그때의 당신을 절대로 잊지마세요.',
+    '이럴 때일 수록 정신 차리는게 좋아요.',
+    '이 또한 지나가리.',
+    '행복만 가득하길 바라요.',
+    '잠시 울어도 좋아요.',
+    '지금은 힘들더라도 잘 해낼 수 있어요.',
+    '앞으로도 그 모습 변치 않길 바라요.',
+    '따뜻한 날만 가득하길 바라요.',
+    '지금을 즐겨요.',
+    '누구에게 기대도 좋아요.',
+    '지금을 소중히 하길 바라요.',
+    '지금 당신이 어디 서있든 넘어지지 말아요.',
+    '편안한 밤을 보내길 바라요.',
+    '오늘은 행운이 가득한 날이에요.',
+    '앞으로 잘 할 수 있는 힘이 생길거예요.',
+    '이 순간을 잊지 말고 기억해줘요.',
+    '꼭 따라갈 필요 없어요.',
+    '당신의 길을 나아가세요.',
+    '천천히 나아가도 괜찮아요.',
+    '주변의 말을 귀담아 듣지 않아도 돼요.',
+    '지금 모습도 아름답고 멋져요.',
+    '과거를 잊고 지금을 살아요.',
+    '잘 지내길 바라요.',
+    '걱정하지 말아요.',
+    ' 좋아하는 것을 자주 하세요.',
+    '당신이 가는 길이 부디 평안하길 빌어요.',
   ];
-  $('#quote').text(quote_list[{{ quote_index }}]);
+  $('#quote').text(quote_list[Math.floor(Math.random() * quote_list.length)]);
 </script>
 {% endblock content %}
