@@ -11,9 +11,9 @@ from ai.face_predict import face_prediction
 
 
 def index(request):
-    request.session['red'] = 255
-    request.session['green'] = 255
-    request.session['blue'] = 255
+    request.session['red'] = 0
+    request.session['green'] = 0
+    request.session['blue'] = 0
     request.session['quizStage'] = 1
     request.session['quizPoint'] = 0
     return render(request, 'index.html')
@@ -141,10 +141,6 @@ def face01_result(request):
 
 
 def face02_form(request):
-    return render(request, 'face02_form.html')
-
-
-def face02_result(request):
     answer , red, green, blue = face_prediction('./ai/best_model(cpu).pkl',r'./ai/haarcascade_frontalface_default.xml')
 
     request.session['red'] = red
@@ -155,12 +151,15 @@ def face02_result(request):
       request.session['emotion02'] = True
     else: 
       request.session['emotion02'] = False
+    return render(request, 'face02_form.html')
 
+
+def face02_result(request):
     return render(request, 'face02_result.html')
 
 
-def draw_intro(request):
-    return render(request, 'draw_intro.html')
+def draw_form(request):
+    return render(request, 'draw_form.html')
 
 
 def draw_result(request):

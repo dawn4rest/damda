@@ -20,7 +20,7 @@ urlpatterns = [
     path('face01-result/', views.face01_result, name='face01-result'),
     path('face02-form/', views.face02_form, name='face02-form'),
     path('face02-result/', views.face02_result, name='face02-result'),
-    path('draw-intro/', views.draw_intro, name='draw-intro'),
+    path('draw-form/', views.draw_form, name='draw-form'),
     path('draw-result/', views.draw_result, name='draw-result'),
     path('video', views.video, name='video'),
 ]

@@ -20,7 +20,6 @@
       $.ajax({
         url: `/${curStage}-result`,
         success: function (data) {
-          console.log(data)
           $('.article-body').append(data)
         }
       });
@@ -28,12 +27,11 @@
       $.ajax({
         url: `/${nextStage}-form`,
         success: function (data) {
-          console.log(data)
           $('.article-footer').html(data)
         }
       });
 
-      $(".article-body").animate({
+      $('.article-body').animate({
         scrollTop: $('.article-body').get(0).scrollHeight
       }, 500);
     }, 250)

@@ -1,8 +1,60 @@
+{% load static %}
 {% block form %}
 <span class="cur-stage" style="display: none">face01</span>
 <span class="next-stage" style="display: none">face02</span>
 
-<div id="video">
-  <img src="{% url 'ai:video' %}" width="557px" height="502px">
+<!-- Modal -->
+<div class="modal fade show" id="staticBackdrop" data-bs-backdrop="static" data-bs-keyboard="false" tabindex="-1"
+  aria-labelledby="staticBackdropLabel" aria-hidden="true">
+  <div class="modal-dialog modal-dialog-centered">
+    <div class="modal-content">
+      <div class="article-header">
+        <div class="btn-wrap | d-flex">
+          <button class="btn-red"></button>
+          <button class="btn-green"></button>
+          <button class="btn-blue"></button>
+        </div>
+      </div>
+      <div id="video">
+        <img src="{% url 'ai:video' %}" width="557px" height="502px">
+        <input class="btn-submit" data-bs-dismiss="modal" aria-label="Close" type="submit" value="담기">
+      </div>
+    </div>
+  </div>
 </div>
+
+<script>
+  $('.modal-loading').fadeOut(500);
+  $('.modal').modal('show');
+  $('.btn-submit').css('pointer-events', 'none');
+
+  setTimeout(function () {
+    $('.btn-submit').css('pointer-events', 'auto');
+  }, 3000);
+
+  $('.btn-submit').on('click', function (e) {
+    var curStage = $('.cur-stage').text();
+    var nextStage = $('.next-stage').text();
+
+    setTimeout(function () {
+      $.ajax({
+        url: `/${curStage}-result`,
+        success: function (data) {
+          $('.article-body').append(data)
+        }
+      });
+
+      $.ajax({
+        url: `/${nextStage}-form`,
+        success: function (data) {
+          $('.article-footer').html(data)
+        }
+      });
+
+      $('.article-body').animate({
+        scrollTop: $('.article-body').get(0).scrollHeight
+      }, 500);
+    }, 250)
+  });
+</script>
 {% endblock form %}

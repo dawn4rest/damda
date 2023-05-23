@@ -1,35 +1,49 @@
-{% extends 'home.html' %}
 {% load static %}
-
 {% block content %}
-
 {% if request.session.emotion01 %}
-{% if request.session.emotion02 %}
-<p>
-  당신의 그런 모습이 정말 존경스러운걸요,<br>
-  앞으로도 그 마음 변치 않고 가지고 가길 빌어요.
-</p>
+<p class="host answer" name="posAnswers"></p>
 {% else %}
-<p>
-  그동안 고생 많았어요,<br>
-  지금은 어려울지라도 앞으로 잘 헤쳐나갈 수 있을 힘이<br>
-  당신에게 꼭 생길거예요.
-</p>
-{% endif %}
-{% else %}
-{% if request.session.emotion02 %}
-<p>
-  당신의 그런 모습이 정말 존경스러운걸요,<br>
-  앞으로도 그 마음 변치 않고 가지고 가길 빌어요.
-</p>
-{% else %}
-<p>
-  그동안 고생 많았어요,<br>
-  지금은 어려울지라도 앞으로 잘 헤쳐나갈 수 있을 힘이<br>
-  당신에게 꼭 생길거예요.
-</p>
-{% endif %}
+<p class="host answer" name="negAnswers"></p>
 {% endif %}
 
-<a href="{% url 'ai:canvas-intro' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
+<p class="host">
+  지금까지 당신의 이야기를 들려줘서 고마워요!<br>
+  마지막으로,<br>
+  자신이 생각하는 자신을 그림으로 그려서 담아볼까요?
+</p>
+
+<script>
+  var type = $('.answer').attr('name');
+  if (type === 'posAnswers') {
+    var ranIndex = Math.floor(Math.random() * posAnswers.length);
+    var posAnswers = posAnswers.filter(function (elem, idx) {
+      if (idx === ranIndex) {
+        $('.answer').text(elem);
+        return false;
+      } else {
+        return true;
+      }
+    })
+  } else {
+    var ranIndex = Math.floor(Math.random() * negAnswers.length);
+    var negAnswers = negAnswers.filter(function (elem, idx) {
+      var elem = elem;
+
+      if (idx === ranIndex) {
+        $('.answer').text(elem);
+        $('.answer').removeClass('answer');
+        return false;
+      } else {
+        return true;
+      }
+    })
+  }
+
+  $('.article-body').css('background-color', 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})');
+  $('.modal').modal('hide');
+  setTimeout(function () {
+    $('.modal-loading').remove();
+    $('.modal').remove();
+  }, 1000);
+</script>
 {% endblock content %}

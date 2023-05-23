@@ -1,21 +1,59 @@
-{% extends 'home.html' %}
 {% load static %}
-
 {% block content %}
-
 {% if request.session.emotion01 %}
-<p>
-  당신은 지금 {{ request.session.problem }}에 대해 잘 해결하려고 하고 있군요.<br>
-  그렇다면 더 자세히 얘기해줄래요? 흥미진진해서 궁금해졌어요.
-</p>
+<p class="host answer" name="posAnswers"></p>
 {% else %}
-<p>
-  당신은 지금 {{ request.session.problem }}에 대해 많은 걱정을 하고 있군요,<br>
-  그동안 힘들었겠어요.<br>
-  <br>
-  그렇다면 앞으로 어떻게 하고 싶은지도 애기해줄래요?
-</p>
+<p class="host answer" name="negAnswers"></p>
 {% endif %}
 
-<a href="{% url 'ai:goal-form' %}" class="space-link">space 키를 누르면 다음으로 넘어갑니다.</a>
+<p class="host">
+  그렇군요, 당신은 그런 고민을 마음에 담아두고 있었군요.<br>
+  이번엔 더 자유롭게 당신의 표정과 목소리로 저에게 알려주세요.
+</p>
+<p class="host">
+  <span class="d-flex align-items-center">
+    <img src="{% static '/img/icon_video.svg' %}" alt="">
+    페이스담을 통해 당신의 표정을 알려주세요.<br>
+    잠시 후, 페이스담이 시작됩니다.
+  </span>
+</p>
+<p class="host">
+  <span class="d-flex align-items-center">
+    <img src="{% static '/img/icon_video.svg' %}" alt="">
+    페이스담이 진행중입니다.
+  </span>
+</p>
+
+<script>
+  var type = $('.answer').attr('name');
+  if (type === 'posAnswers') {
+    var ranIndex = Math.floor(Math.random() * posAnswers.length);
+    var posAnswers = posAnswers.filter(function (elem, idx) {
+      if (idx === ranIndex) {
+        $('.answer').text(elem);
+        return false;
+      } else {
+        return true;
+      }
+    })
+  } else {
+    var ranIndex = Math.floor(Math.random() * negAnswers.length);
+    var negAnswers = negAnswers.filter(function (elem, idx) {
+      var elem = elem;
+
+      if (idx === ranIndex) {
+        $('.answer').text(elem);
+        $('.answer').removeClass('answer');
+        return false;
+      } else {
+        return true;
+      }
+    })
+  }
+
+  $('.article-body').css('background-color', 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})');
+  setTimeout(function () {
+    $('.modal-loading').css('display', 'flex');
+  }, 3000);
+</script>
 {% endblock content %}

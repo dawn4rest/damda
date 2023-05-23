@@ -14,4 +14,24 @@
     잠시 후, 페이스담이 시작됩니다.
   </span>
 </p>
+<p class="host">
+  <span class="d-flex align-items-center">
+    <img src="{% static '/img/icon_video.svg' %}" alt="">
+    페이스담이 진행중입니다.
+  </span>
+</p>
+
+<div class="modal-loading">
+  <div class="spinner-box">
+    <div class="circle-border">
+      <div class="circle-core"></div>
+    </div>
+  </div>
+</div>
+
+<script>
+  setTimeout(function () {
+    $('.modal-loading').css('display', 'flex');
+  }, 3000);
+</script>
 {% endblock content %}
