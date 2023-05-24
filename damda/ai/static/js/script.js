@@ -35,9 +35,6 @@ $('document').ready(function() {
         }
       }
   
-      console.log(curStage);
-      console.log(nextStage);
-  
       setTimeout(function() {
         $.ajax({
           url: `/${curStage}-result`,
