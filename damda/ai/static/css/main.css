@@ -265,6 +265,18 @@ body {
   resize: none;
 }
 
+#main .input-wrap label {
+  font-size: 30px;
+  line-height: 36px;
+  cursor: pointer;
+}
+
+#main .input-wrap input[type="radio"] {
+  margin-right: 5px;
+  width: 20px;
+  height: 20px;
+}
+
 #main .input-half {
   padding-left: 10px;
   width: 548px;

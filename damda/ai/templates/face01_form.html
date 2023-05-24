@@ -32,7 +32,15 @@
     $('.btn-submit').css('pointer-events', 'auto');
   }, 3000);
 
-  $('.btn-submit').on('click', function (e) {
+  $('.btn-submit').on('click', function () {
+    $(this).css('pointer-events', 'none');
+    setTimeout(function () {
+      $('.btn-submit').css('pointer-events', 'auto');
+    }, 1000);
+    if ($('form textarea').val() === '') {
+      return false;
+    }
+
     var curStage = $('.cur-stage').text();
     var nextStage = $('.next-stage').text();
 

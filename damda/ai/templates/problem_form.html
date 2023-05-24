@@ -13,6 +13,14 @@
 
 <script>
   $('.btn-submit').on('click', function () {
+    $(this).css('pointer-events', 'none');
+    setTimeout(function () {
+      $('.btn-submit').css('pointer-events', 'auto');
+    }, 1000);
+    if ($('form textarea').val() === '') {
+      return false;
+    }
+
     var curStage = $('.cur-stage').text();
     var nextStage = $('.next-stage').text();
 

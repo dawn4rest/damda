@@ -14,7 +14,15 @@ var negAnswers = [
 
 $('document').ready(function() {
   $('.btn-submit').on('click', function () {
-    var stage = ['feel','draw'];
+    $(this).css('pointer-events', 'none');
+    setTimeout(function () {
+      $('.btn-submit').css('pointer-events', 'auto');
+    }, 1000);
+    if($('.article-footer form textarea').val() === '') {
+      return false;
+    }
+
+    var stage = ['feel', 'quiz', 'problem', 'face01', 'face02', 'draw'];
     var curStage = $('form').attr('action').match(/\/([^-]+)/)[1];
     var nextStage = stage[stage.indexOf(curStage) + 1];
   
