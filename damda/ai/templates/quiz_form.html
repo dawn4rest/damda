@@ -54,6 +54,7 @@
           url: `/${curStage}-result`,
           success: function (data) {
             $('.article-body').append(data);
+            setPush();
           }
         });
 

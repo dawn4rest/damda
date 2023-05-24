@@ -24,7 +24,7 @@
           <p id="quote"></p>
           <p>{{ hex_color }}</p>
         </div>
-        <p class="quiz-result">순수하게 내성적</p>
+        <p class="quiz-comment"></p>
       </div>
     </article>
   </section>
@@ -47,7 +47,7 @@
     'health': '당신이 앞으로도 쭉 건강했으면 좋겠어요',
     'relationship': '인간 관계에 너무 힘들어하지 말아요',
   }
-  $('#problem-comment').text(problemObj['health']);
+  $('#problem-comment').text(problemObj['{{ request.session.problem_result }}']);
 
   var quote_list = [
     '열린 마음으로 기다려보아요.',
@@ -109,5 +109,8 @@
     '당신이 가는 길이 부디 평안하길 빌어요.',
   ];
   $('#quote').text(quote_list[Math.floor(Math.random() * quote_list.length)]);
+
+  var quizValue = $('.quiz-result').text();
+  $('.quiz-comment').text(quizValue);
 </script>
 {% endblock content %}

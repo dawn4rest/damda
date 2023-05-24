@@ -48,14 +48,15 @@
       $.ajax({
         url: `/${curStage}-result`,
         success: function (data) {
-          $('.article-body').append(data)
+          $('.article-body').append(data);
+          setPush();
         }
       });
 
       $.ajax({
         url: `/${nextStage}-form`,
         success: function (data) {
-          $('.article-footer').html(data)
+          $('.article-footer').html(data);
         }
       });
 

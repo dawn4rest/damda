@@ -28,7 +28,7 @@
   setTimeout(function () {
     $('.btn-submit').css('pointer-events', 'auto');
     $('.modal').modal('show');
-  }, 3000);
+  }, 5000);
 
   $('.btn-submit').on('click', function () {
     $(this).css('pointer-events', 'none');
@@ -46,14 +46,15 @@
       $.ajax({
         url: `/${curStage}-result`,
         success: function (data) {
-          $('.article-body').append(data)
+          $('.article-body').append(data);
+          setPush();
         }
       });
 
       $.ajax({
         url: `/${nextStage}`,
         success: function (data) {
-          $('.article-footer').html(data)
+          $('.article-footer').html(data);
         }
       });
 

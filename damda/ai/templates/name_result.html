@@ -13,32 +13,6 @@
   오늘 기분은 어떠한지 말해줄 수 있나요?<br>
   그리고 그 기분의 이유도 같이 말해주세요.
 </p>
-
-<!-- <script>
-  var setPush = function (target) {
-    var type = target.attr('class');
-    console.log(type);
-
-    setTimeout(function () {
-      new Audio(`/static/media/push_${type}.mp3`).play();
-    }, 500);
-
-    target.addClass('active');
-    target.fadeIn();
-  };
-
-  $(document).ready(function () {
-    $('.article-body p').each(function () {
-      console.log('hi');
-      if ($(this).hasClass('active') === false) {
-        var target = $(this);
-        setTimeout(function () {
-          setPush(target);
-        }, 1000);
-      }
-    });
-  });
-</script> -->
 {% endblock content %}
 
 

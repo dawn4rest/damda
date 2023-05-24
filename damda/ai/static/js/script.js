@@ -11,8 +11,28 @@ var negAnswers = [
   '이야기를 하기 까지 많은 일들이 있었겠어요, 고생이 많네요.',
 ];
 
+var setPush = function() {
+  var $targetEl = $('.article-body p:not(.active)');
+  var time = 0;
+
+  $targetEl.each(function() {
+    var _this = $(this)
+    setTimeout( function(){ 
+      var type = _this.attr('class');
+      new Audio(`/static/media/push_${type}.mp3`).play();
+      _this.addClass('active');
+
+      $(".article-body").animate({
+        scrollTop: $('.article-body').get(0).scrollHeight
+      }, 1000);
+    }, time);
+    time += 1000;
+  });
+};
 
 $('document').ready(function() {
+  setPush();
+
   $('.btn-submit').on('click', function () {
     $(this).css('pointer-events', 'none');
     setTimeout(function () {
@@ -40,6 +60,7 @@ $('document').ready(function() {
           url: `/${curStage}-result`,
           success: function (data) {
             $('.article-body').append(data);
+            setPush();
           }
         });
       

@@ -169,16 +169,18 @@ body {
   background-color: #ffffff;
 }
 
-/* #main .article-body p {
+#main .article-body p {
   position: relative;
-  top: -50px;
-  display: none;
-  transition: all 0.5s ease;
+  bottom: -25px;
+  opacity: 0;
+  height: 0;
+  transition: all 1s ease;
 }
 #main .article-body p.active {
-  display: block;
-  top: 0;
-} */
+  opacity: 1;
+  bottom: 0;
+  height: auto;
+}
 #main .article-body p.host {
   margin-left: 8px;
 }
@@ -417,7 +419,7 @@ body {
   min-width: 400px;
   transform: rotate(21.3deg);
 }
-.quiz-result {
+.quiz-comment {
   min-width: 400px;
   transform: rotate(-21.3deg);
 }
