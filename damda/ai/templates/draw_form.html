@@ -64,11 +64,18 @@
     }, 250)
   });
 
+  var rsRed = {{ request.session.red }} === 0 ? 1 : {{ request.session.red }};
+  var rsGreen = {{ request.session.green }} === 0 ? 1 : {{ request.session.green }};
+  var rsBlue = {{ request.session.blue }} === 0 ? 1 : {{ request.session.blue }};
+  rsRed = Math.floor((rsRed / (rsRed + rsGreen + rsBlue)) * 255)
+  rsGreen = Math.floor((rsGreen / (rsRed + rsGreen + rsBlue)) * 255)
+  rsBlue = Math.floor((rsBlue / (rsRed + rsGreen + rsBlue)) * 255)
+
   const canvas = document.querySelector("#canvas");
   const ctx = canvas.getContext("2d");
   ctx.lineWidth = 25;
   ctx.lineCap = "round";
-  ctx.strokeStyle = 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})';
+  ctx.strokeStyle = `rgb(${rsRed}, ${rsGreen}, ${rsBlue})`;
 
   const draw = e => {
     const x = e.offsetX;

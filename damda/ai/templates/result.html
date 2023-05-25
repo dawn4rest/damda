@@ -8,7 +8,7 @@
       <h1 class="result-title">{{ request.session.username }}님의 담</h1>
 
       <svg xmlns="http://www.w3.org/2000/svg" width="1043" height="827" viewBox="0 0 1043 827" fill="none">
-        <path
+        <path id="colorBox"
           d="M1.5 179.33L518.099 372.364L518.648 372.569L519.191 372.348L1039.93 159.916V621.653L518.626 825.389L1.5 621.656V179.33Z"
           fill="rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})" stroke="black"
           stroke-width="3" />
@@ -39,6 +39,24 @@
     $('.result-wrapper').fadeIn(1000);
     $('.result-draw').html($('.canvas-result'));
   }, 5000);
+
+  var rsRed = {{ request.session.red }} === 0 ? 1 : {{ request.session.red }};
+  var rsGreen = {{ request.session.green }} === 0 ? 1 : {{ request.session.green }};
+  var rsBlue = {{ request.session.blue }} === 0 ? 1 : {{ request.session.blue }};
+  rsRed = Math.floor((rsRed / (rsRed + rsGreen + rsBlue)) * 255)
+  rsGreen = Math.floor((rsGreen / (rsRed + rsGreen + rsBlue)) * 255)
+  rsBlue = Math.floor((rsBlue / (rsRed + rsGreen + rsBlue)) * 255)
+
+  function ColorToHex(color) {
+    var hexadecimal = color.toString(16);
+    return hexadecimal.length == 1 ? "0" + hexadecimal : hexadecimal;
+  }
+  function ConvertRGBtoHex(red, green, blue) {
+    return ColorToHex(red) + ColorToHex(green) + ColorToHex(blue);
+  }
+
+  $('.result-right #color').text(ConvertRGBtoHex(rsRed, rsGreen, rsBlue));
+  $('#colorBox').attr('fill', `#${ConvertRGBtoHex(rsRed, rsGreen, rsBlue)}`);
 
   var problemObj = {
     'default': '당신의 고민을 얘기해줘서 고마워요',
