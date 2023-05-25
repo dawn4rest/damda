@@ -387,25 +387,36 @@ body {
 
 
 
-.result-wrapper .result-title {
+
+#main .result-wrapper .result-title {
   margin-bottom: 37px;
   font-size: 50px;
   line-height: 61px;
   color: #FFFFFF;
 }
-.result-wrapper svg {
+#main .result-wrapper svg {
   margin: 0 auto;
 }
-.result-wrapper .result-draw {
+#main .result-wrapper .result-draw {
+  position: relative;
+  margin: -200px auto 0;
+  width: 200px;
+  height: 200px;
+}
+#main .result-wrapper .result-draw .canvas-result {
   position: absolute;
-  top: 25%;
+  top: 335px;
   left: 0;
   right: 0;
   margin: 0 auto;
-  width: 250px;
-  height: 250px;
+  width: 200px;
+  height: 200px;
 }
-.result-wrapper .result-box {
+#main .result-wrapper .result-draw .canvas-result #cavas {
+  width: 200px;
+  height: 200px;
+}
+#main .result-wrapper .result-box {
   position: absolute;
   top: 55%;
   left: 0;
@@ -415,16 +426,18 @@ body {
   max-width: 960px;
   color: #ffffff;
 }
-.text-result {
+#main .result-box p {
+  margin-bottom: 8px;
+  font-size: 45px;
+  line-height: 54px;
+}
+#main .result-left {
   min-width: 400px;
   transform: rotate(21.3deg);
 }
-.quiz-comment {
+#main .result-right {
   min-width: 400px;
   transform: rotate(-21.3deg);
-}
-.text-result p {
-  margin-bottom: 8px;
 }
 
 .link-root {

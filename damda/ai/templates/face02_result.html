@@ -26,10 +26,11 @@
 </p>
 
 <script>
+  var problem = '{{ request.session.problem_result }}';
   var type = $('.answer').attr('name');
   if (type === 'posAnswers') {
-    var ranIndex = Math.floor(Math.random() * posAnswers.length);
-    var posAnswers = posAnswers.filter(function (elem, idx) {
+    var ranIndex = Math.floor(Math.random() * posAnswers[problem].length);
+    posAnswers[problem] = posAnswers[problem].filter(function (elem, idx) {
       if (idx === ranIndex) {
         $('.answer').text(elem);
         return false;
@@ -38,8 +39,8 @@
       }
     })
   } else {
-    var ranIndex = Math.floor(Math.random() * negAnswers.length);
-    var negAnswers = negAnswers.filter(function (elem, idx) {
+    var ranIndex = Math.floor(Math.random() * negAnswers[problem].length);
+    negAnswers[problem] = negAnswers[problem].filter(function (elem, idx) {
       var elem = elem;
 
       if (idx === ranIndex) {
