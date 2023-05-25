@@ -24,8 +24,19 @@
 </div>
 
 <script>
-  $('.modal-loading').fadeOut(500);
-  $('.modal').modal('show');
+  $('.btn-modal').on('click', function () {
+    $('.modal-loading').css('display', 'flex');
+    $('p.hidden').removeClass('hidden');
+    $(".article-body").animate({
+      scrollTop: $('.article-body').get(0).scrollHeight
+    }, 500);
+
+    setTimeout(function () {
+      $('.modal-loading').fadeOut(500);
+      $('.modal').modal('show');
+    }, 5000);
+  });
+
   $('.btn-submit').css('pointer-events', 'none');
 
   setTimeout(function () {

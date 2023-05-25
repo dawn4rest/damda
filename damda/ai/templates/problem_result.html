@@ -9,12 +9,12 @@
 </p>
 <p class="host">
   <span class="d-flex align-items-center">
-    <img src="{% static '/img/icon_video.svg' %}" alt="">
+    <img class="btn-modal" src="{% static '/img/icon_video.svg' %}" alt="">
     페이스담을 통해 당신의 표정을 알려주세요.<br>
     잠시 후, 페이스담이 시작됩니다.
   </span>
 </p>
-<p class="host">
+<p class="host acitve hidden">
   <span class="d-flex align-items-center">
     <img src="{% static '/img/icon_video.svg' %}" alt="">
     페이스담이 진행중입니다.
@@ -30,8 +30,19 @@
 </div>
 
 <script>
-  setTimeout(function () {
+  $('textarea').val('');
+
+  $('.btn-modal').on('click', function () {
     $('.modal-loading').css('display', 'flex');
-  }, 5000);
+    $('p.hidden').removeClass('hidden');
+    $(".article-body").animate({
+      scrollTop: $('.article-body').get(0).scrollHeight
+    }, 500);
+
+    setTimeout(function () {
+      $('.modal-loading').fadeOut(500);
+      $('.modal').modal('show');
+    }, 5000);
+  });
 </script>
 {% endblock content %}

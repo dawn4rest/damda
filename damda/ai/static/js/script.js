@@ -102,7 +102,13 @@ var setPush = function() {
         scrollTop: $('.article-body').get(0).scrollHeight
       }, 1000);
     }, time);
-    time += 1000;
+
+    if($('form').attr('action') === '/quiz-form') {
+      console.log('quiz');
+      time += 1000;
+    } else {
+      time += 3000;
+    }
   });
 };
 
@@ -118,7 +124,7 @@ $('document').ready(function() {
       return false;
     }
 
-    var stage = ['feel', 'quiz', 'problem', 'face01', 'face02', 'draw'];
+    var stage = ['feel', 'problem', 'face01', 'face02', 'draw'];
     var curStage = $('form').attr('action').match(/\/([^-]+)/)[1];
     var nextStage = stage[stage.indexOf(curStage) + 1];
   

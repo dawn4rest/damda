@@ -56,6 +56,10 @@ table {
   font-style: normal;
 }
 
+.hidden {
+  display: none !important;
+}
+
 .mb-36 {
   margin-bottom: 36px;
 }
@@ -174,7 +178,7 @@ body {
   bottom: -25px;
   opacity: 0;
   height: 0;
-  transition: all 1s ease;
+  transition: all 1.5s ease;
 }
 #main .article-body p.active {
   opacity: 1;
@@ -423,7 +427,7 @@ body {
   right: 0;
   margin: 0 auto;
   width: 100%;
-  max-width: 960px;
+  max-width: 1024px;
   color: #ffffff;
 }
 #main .result-box p {

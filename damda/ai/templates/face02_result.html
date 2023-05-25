@@ -13,12 +13,12 @@
 </p>
 <p class="host">
   <span class="d-flex align-items-center">
-    <img src="{% static '/img/icon_draw.svg' %}" alt="">
+    <img class="btn-modal" src="{% static '/img/icon_draw.svg' %}" alt="">
     잠시후, 드로우담이 실행됩니다.<br>
     여러분이 생각하는 것을 자유롭게 담아주세요.
   </span>
 </p>
-<p class="host">
+<p class="host acitve hidden">
   <span class="d-flex align-items-center">
     <img src="{% static '/img/icon_draw.svg' %}" alt="">
     드로우담이 진행중입니다.
@@ -26,6 +26,19 @@
 </p>
 
 <script>
+  $('.btn-modal').on('click', function () {
+    $('.modal-loading').css('display', 'flex');
+    $('p.hidden').removeClass('hidden');
+    $(".article-body").animate({
+      scrollTop: $('.article-body').get(0).scrollHeight
+    }, 500);
+
+    setTimeout(function () {
+      $('.modal-loading').fadeOut(500);
+      $('.modal').modal('show');
+    }, 5000);
+  });
+
   var problem = '{{ request.session.problem_result }}';
   var type = $('.answer').attr('name');
   if (type === 'posAnswers') {
@@ -53,7 +66,16 @@
     })
   }
 
-  $('.article-body').css('background-color', 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})');
+  var rsRed = {{ request.session.red }} === 0 ? 1 : {{ request.session.red }};
+  var rsGreen = {{ request.session.green }} === 0 ? 1 : {{ request.session.green }};
+  var rsBlue = {{ request.session.blue }} === 0 ? 1 : {{ request.session.blue }};
+  rsRed = Math.floor((rsRed / (rsRed + green + rsBlue)) * 255)
+  rsGreen = Math.floor((rsGreen / (rsRed + rsGreen + rsBlue)) * 255)
+  rsBlue = Math.floor((rsBlue / (rsRed + rsGreen + rsBlue)) * 255)
+  console.log(rsRed);
+  console.log(rsGreen);
+  console.log(rsBlue);
+  $('.article-body').css('background-color', `rgb(${rsRed}, ${rsGreen}, ${rsBlue})`);
   $('.modal').modal('hide');
 </script>
 {% endblock content %}

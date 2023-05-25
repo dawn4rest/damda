@@ -12,12 +12,12 @@
 </p>
 <p class="host">
   <span class="d-flex align-items-center">
-    <img src="{% static '/img/icon_video.svg' %}" alt="">
+    <img class="btn-modal" src="{% static '/img/icon_video.svg' %}" alt="">
     페이스담을 통해 당신의 표정을 알려주세요.<br>
     잠시 후, 페이스담이 시작됩니다.
   </span>
 </p>
-<p class="host">
+<p class="host acitve hidden">
   <span class="d-flex align-items-center">
     <img src="{% static '/img/icon_video.svg' %}" alt="">
     페이스담이 진행중입니다.
@@ -52,9 +52,16 @@
     })
   }
 
-  $('.article-body').css('background-color', 'rgb({{ request.session.red }},{{ request.session.green }},{{ request.session.blue }})');
-  setTimeout(function () {
-    $('.modal-loading').css('display', 'flex');
-  }, 5000);
+  var rsRed = {{ request.session.red }} === 0 ? 1 : {{ request.session.red }};
+  var rsGreen = {{ request.session.green }} === 0 ? 1 : {{ request.session.green }};
+  var rsBlue = {{ request.session.blue }} === 0 ? 1 : {{ request.session.blue }};
+  rsRed = Math.floor((rsRed / (rsRed + green + rsBlue)) * 255)
+  rsGreen = Math.floor((rsGreen / (rsRed + rsGreen + rsBlue)) * 255)
+  rsBlue = Math.floor((rsBlue / (rsRed + rsGreen + rsBlue)) * 255)
+  console.log(rsRed);
+  console.log(rsGreen);
+  console.log(rsBlue);
+  $('.article-body').css('background-color', `rgb(${rsRed}, ${rsGreen}, ${rsBlue})`);
+  $('.modal').modal('hide');
 </script>
 {% endblock content %}
