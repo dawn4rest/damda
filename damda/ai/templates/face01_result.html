@@ -55,7 +55,7 @@
   var rsRed = {{ request.session.red }} === 0 ? 1 : {{ request.session.red }};
   var rsGreen = {{ request.session.green }} === 0 ? 1 : {{ request.session.green }};
   var rsBlue = {{ request.session.blue }} === 0 ? 1 : {{ request.session.blue }};
-  rsRed = Math.floor((rsRed / (rsRed + green + rsBlue)) * 255)
+  rsRed = Math.floor((rsRed / (rsRed + rsGreen + rsBlue)) * 255)
   rsGreen = Math.floor((rsGreen / (rsRed + rsGreen + rsBlue)) * 255)
   rsBlue = Math.floor((rsBlue / (rsRed + rsGreen + rsBlue)) * 255)
   console.log(rsRed);
