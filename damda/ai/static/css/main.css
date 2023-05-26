@@ -434,13 +434,14 @@ body {
   margin-bottom: 8px;
   font-size: 45px;
   line-height: 54px;
+  word-break: keep-all;
 }
 #main .result-left {
-  min-width: 400px;
+  width: 500px;
   transform: rotate(21.3deg);
 }
 #main .result-right {
-  min-width: 400px;
+  width: 500px;
   transform: rotate(-21.3deg);
 }
 

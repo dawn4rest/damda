@@ -124,7 +124,7 @@ $('document').ready(function() {
       return false;
     }
 
-    var stage = ['feel', 'problem', 'face01', 'face02', 'draw'];
+    var stage = ['feel', 'quiz', 'problem', 'face01', 'face02', 'draw'];
     var curStage = $('form').attr('action').match(/\/([^-]+)/)[1];
     var nextStage = stage[stage.indexOf(curStage) + 1];
   

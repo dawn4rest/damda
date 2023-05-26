@@ -109,9 +109,13 @@ def problem_form(request):
     if request.method == 'POST':
         problem = request.POST.get('problem')
         problem_result = find_problem(problem)
+        print(problem_result)
         if problem_result != '':
             request.session['problem'] = problem
             request.session['problem_result'] = problem_result
+        else:
+            request.session['problem_result'] = 'default'
+
         return HttpResponse(status=204)
 
     return render(request, 'problem_form.html')
